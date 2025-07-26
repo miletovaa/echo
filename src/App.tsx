@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import './App.css'
 
 function App() {
@@ -25,12 +25,12 @@ function App() {
     }
   }
 
-  const handleInputChange = async (value: string) => {
+  const handleInputChange = useCallback(async (value: string) => {
     localStorage.setItem('inputValue', value)
 
     const output = await fetchOutput(value)
     setOutputValue(output)
-  }
+  }, [])
 
   useEffect(() => {
     const timeout = setTimeout(() => {
